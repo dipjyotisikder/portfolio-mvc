@@ -49,12 +49,21 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -173,19 +182,77 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminHomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminProfileController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CategoryManagerController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SkillsManagerController.cs" />
+    <Compile Include="Areas\Admin\Models\ProfileViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\SkillViewModel.cs" />
+    <Compile Include="Areas\Portfolio\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Portfolio\Models\Pcategory.cs" />
+    <Compile Include="Areas\Portfolio\Models\Pimage.cs" />
+    <Compile Include="Areas\Portfolio\Models\Project.cs" />
+    <Compile Include="Areas\Portfolio\Models\Pskill.cs" />
+    <Compile Include="Areas\Portfolio\Models\ViewModels\HomeViewModel.cs" />
+    <Compile Include="Areas\Portfolio\PortfolioAreaRegistration.cs" />
+    <Compile Include="Areas\Portfolio\Services\ImgUploader.cs" />
+    <Compile Include="Areas\Portfolio\Services\Reverse.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903141649315_Initial.cs" />
+    <Compile Include="Migrations\201903141649315_Initial.Designer.cs">
+      <DependentUpon>201903141649315_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903151024598_secondMigration.cs" />
+    <Compile Include="Migrations\201903151024598_secondMigration.Designer.cs">
+      <DependentUpon>201903151024598_secondMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903231104341_AddProjectModel.cs" />
+    <Compile Include="Migrations\201903231104341_AddProjectModel.Designer.cs">
+      <DependentUpon>201903231104341_AddProjectModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\GetImageUrl.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Admin\css\AdminLTE.min.css" />
+    <Content Include="Content\Admin\css\AdminStyle.css" />
+    <Content Include="Content\Admin\css\bootstrap.min.css" />
+    <Content Include="Content\Admin\css\font-awesome\css\font-awesome.css" />
+    <Content Include="Content\Admin\css\font-awesome\css\font-awesome.min.css" />
+    <Content Include="Content\Admin\css\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\Admin\css\font-awesome\HELP-US-OUT.txt" />
+    <Content Include="Content\Admin\css\ionicons.min.css" />
+    <Content Include="Content\Admin\css\jquery-jvectormap.css" />
+    <Content Include="Content\Admin\css\_all-skins.min.css" />
+    <Content Include="Content\Admin\img\IMG_.jpg" />
+    <Content Include="Content\Admin\img\materialthumb.jpg" />
+    <Content Include="Content\Admin\js\adminlte.js" />
+    <Content Include="Content\Admin\js\adminlte.min.js" />
+    <Content Include="Content\Admin\js\bootstrap.min.js" />
+    <Content Include="Content\Admin\js\Chart.js" />
+    <Content Include="Content\Admin\js\Chart.min.js" />
+    <Content Include="Content\Admin\js\dashboard2.js" />
+    <Content Include="Content\Admin\js\demo.js" />
+    <Content Include="Content\Admin\js\fastclick.js" />
+    <Content Include="Content\Admin\css\googlefont.css" />
+    <Content Include="Content\Admin\js\html5shiv.min.js" />
+    <Content Include="Content\Admin\js\jquery.min.js" />
+    <Content Include="Content\Admin\js\jquery.slimscroll.min.js" />
+    <Content Include="Content\Admin\js\jquery.sparkline.min.js" />
+    <Content Include="Content\Admin\js\respond.min.js" />
+    <Content Include="Content\Admin\js\SweetAlert.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -196,6 +263,64 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Areas\Portfolio\Views\web.config" />
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\Shared\_adminlayout.cshtml" />
+    <Content Include="Content\Admin\css\adminlte.min.css.map" />
+    <Content Include="Content\Admin\css\bootstrap.min.css.map" />
+    <Content Include="Content\Admin\css\font-awesome\.bower.json" />
+    <Content Include="Content\Admin\css\font-awesome\.gitignore" />
+    <Content Include="Content\Admin\css\font-awesome\.npmignore" />
+    <Content Include="Content\Admin\css\font-awesome\bower.json" />
+    <Content Include="Content\Admin\css\font-awesome\css\font-awesome.css.map" />
+    <Content Include="Content\Admin\css\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\Admin\css\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\Admin\css\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\Admin\css\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\Admin\css\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="Content\Admin\css\font-awesome\less\animated.less" />
+    <Content Include="Content\Admin\css\font-awesome\less\bordered-pulled.less" />
+    <Content Include="Content\Admin\css\font-awesome\less\core.less" />
+    <Content Include="Content\Admin\css\font-awesome\less\fixed-width.less" />
+    <Content Include="Content\Admin\css\font-awesome\less\font-awesome.less" />
+    <Content Include="Content\Admin\css\font-awesome\less\icons.less" />
+    <Content Include="Content\Admin\css\font-awesome\less\larger.less" />
+    <Content Include="Content\Admin\css\font-awesome\less\list.less" />
+    <Content Include="Content\Admin\css\font-awesome\less\mixins.less" />
+    <Content Include="Content\Admin\css\font-awesome\less\path.less" />
+    <Content Include="Content\Admin\css\font-awesome\less\rotated-flipped.less" />
+    <Content Include="Content\Admin\css\font-awesome\less\screen-reader.less" />
+    <Content Include="Content\Admin\css\font-awesome\less\stacked.less" />
+    <Content Include="Content\Admin\css\font-awesome\less\variables.less" />
+    <Content Include="Content\Admin\css\font-awesome\scss\font-awesome.scss" />
+    <Content Include="Content\Admin\css\font-awesome\scss\_animated.scss" />
+    <Content Include="Content\Admin\css\font-awesome\scss\_bordered-pulled.scss" />
+    <Content Include="Content\Admin\css\font-awesome\scss\_core.scss" />
+    <Content Include="Content\Admin\css\font-awesome\scss\_fixed-width.scss" />
+    <Content Include="Content\Admin\css\font-awesome\scss\_icons.scss" />
+    <Content Include="Content\Admin\css\font-awesome\scss\_larger.scss" />
+    <Content Include="Content\Admin\css\font-awesome\scss\_list.scss" />
+    <Content Include="Content\Admin\css\font-awesome\scss\_mixins.scss" />
+    <Content Include="Content\Admin\css\font-awesome\scss\_path.scss" />
+    <Content Include="Content\Admin\css\font-awesome\scss\_rotated-flipped.scss" />
+    <Content Include="Content\Admin\css\font-awesome\scss\_screen-reader.scss" />
+    <Content Include="Content\Admin\css\font-awesome\scss\_stacked.scss" />
+    <Content Include="Content\Admin\css\font-awesome\scss\_variables.scss" />
+    <Content Include="Areas\Admin\Views\AdminHome\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_loginpartial.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminProfile\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminProfile\ProfilePicture.cshtml" />
+    <Content Include="Areas\Admin\Views\CategoryManager\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\CategoryManager\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\CategoryManager\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\CategoryManager\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\SkillsManager\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\SkillsManager\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\SkillsManager\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\SkillsManager\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\SkillsManager\Index.cshtml" />
+    <Content Include="Areas\Portfolio\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Portfolio\Views\Home\_Skill.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -243,7 +368,8 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <Folder Include="App_Data\Images\" />
+    <Folder Include="Areas\Portfolio\Views\Shared\PartialView\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -257,6 +383,17 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201903141649315_Initial.resx">
+      <DependentUpon>201903141649315_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903151024598_secondMigration.resx">
+      <DependentUpon>201903151024598_secondMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903231104341_AddProjectModel.resx">
+      <DependentUpon>201903231104341_AddProjectModel.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
