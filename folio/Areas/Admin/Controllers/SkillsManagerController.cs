@@ -19,23 +19,15 @@ namespace folio.Areas.Admin.Controllers
     public class SkillsManagerController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-        private HttpServerUtilityBase utilityBase;
         private List<HttpPostedFileBase> imageFiles = new List<HttpPostedFileBase>();
 
-        public SkillsManagerController(HttpServerUtilityBase utility)
-        {
-            utilityBase = utility;
-        }
 
         // GET: Admin/SkillsManager
         public async Task<ActionResult> Index()
         {
 
             var pskills = db.Pskills
-                .Include(c => c.Pimages)
-                .Include(p => p.Category);
-
-
+                .Include(c => c.Pimages);
             var Pskills = await pskills.ToListAsync();
             return View(Pskills);
         }
@@ -110,14 +102,9 @@ namespace folio.Areas.Admin.Controllers
                 //image upload start
                 foreach (var model in imageFiles)
                 {
-                    //string filename = Path.GetFileNameWithoutExtension(model.FileName);
-                    //string extension = Path.GetExtension(model.FileName);
-                    //filename = filename + DateTime.Now.ToString("yymmssff") + extension;
-                    //model.SaveAs(Path.Combine(Server.MapPath("/Content/Admin/img"), filename));
 
-                    //function for getting the image
                     GetImageUrl getImageUrl = new GetImageUrl();
-                    string Url = getImageUrl.Get(model, utilityBase);
+                    string Url = getImageUrl.Get(model);
                     var finalURL = Url;
 
                     var image = new Pimage
@@ -130,12 +117,14 @@ namespace folio.Areas.Admin.Controllers
                     await db.SaveChangesAsync();
 
                 }
-                return Json(JsonRequestBehavior.AllowGet);
+                return RedirectToAction("Index");
             }
 
             ViewBag.CategoryId = new SelectList(db.Pcategories, "Id", "Name", skillView.CategoryId);
             return View(skillView);
         }
+
+
 
         // GET: Admin/SkillsManager/Edit/5
         public async Task<ActionResult> Edit(int? id)
@@ -144,31 +133,95 @@ namespace folio.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Pskill pskill = await db.Pskills.FindAsync(id);
+            Pskill pskill = await db.Pskills
+                .Include(c => c.Pimages)
+                .Include(c => c.ProjectSkills)
+                .SingleOrDefaultAsync(c => c.Id == id);
+
             if (pskill == null)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            var vm = new SkillViewModel
             {
-                return HttpNotFound();
-            }
+                Id = pskill.Id,
+                Name = pskill.Name,
+                Description = pskill.Description,
+                Strength = pskill.Strength,
+                Pimages = pskill.Pimages,
+                CategoryId = pskill.CategoryId,
+
+            };
             ViewBag.CategoryId = new SelectList(db.Pcategories, "Id", "Name", pskill.CategoryId);
-            return View(pskill);
+            return View(vm);
         }
 
-        // POST: Admin/SkillsManager/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Name,Description,CategoryId")] Pskill pskill)
+        public async Task<ActionResult> Edit(SkillViewModel skill)
         {
+            var dbSkill = await db.Pskills
+                .Include(c => c.Pimages)
+                .Include(c => c.ProjectSkills)
+                .SingleOrDefaultAsync(c => c.Id == skill.Id);
+
+            if (dbSkill == null)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
             if (ModelState.IsValid)
             {
-                db.Entry(pskill).State = EntityState.Modified;
+
+                dbSkill.Name = skill.Name;
+                dbSkill.Description = skill.Description;
+                dbSkill.CategoryId = skill.CategoryId;
+                dbSkill.Strength = skill.Strength;
+
+                db.Entry(dbSkill).State = EntityState.Modified;
                 await db.SaveChangesAsync();
+
+                if (skill.ImageFile != null)
+                {
+
+                    GetImageUrl getImageUrl = new GetImageUrl();
+                    string Url = getImageUrl.Get(skill.ImageFile);
+                    var finalURL = Url;
+
+                    var image = new Pimage
+                    {
+                        ImageUrl = finalURL,
+                        SkillId = dbSkill.Id
+                    };
+
+                    db.Pimages.Add(image);
+                    await db.SaveChangesAsync();
+                }
                 return RedirectToAction("Index");
+
             }
-            ViewBag.CategoryId = new SelectList(db.Pcategories, "Id", "Name", pskill.CategoryId);
-            return View(pskill);
+            ViewBag.CategoryId = new SelectList(db.Pcategories, "Id", "Name", dbSkill.CategoryId);
+            return View(dbSkill);
         }
+
+        public async Task<ActionResult> RemovePic(int id)
+        {
+
+            var current = await db.Pimages.FindAsync(id);
+
+            //remove pic from folder too
+            var fullPath = Server.MapPath(current.ImageUrl);
+
+            if (System.IO.File.Exists(fullPath))
+            {
+                System.IO.File.Delete(fullPath);
+            }
+
+            db.Pimages.Remove(current);
+            await db.SaveChangesAsync();
+            var sid = (int)TempData["id"];
+
+            return RedirectToAction("Edit", new { id = sid });
+        }
+
 
         // GET: Admin/SkillsManager/Delete/5
         public async Task<ActionResult> Delete(int? id)

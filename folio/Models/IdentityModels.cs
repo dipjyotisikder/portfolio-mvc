@@ -37,13 +37,14 @@ namespace folio.Models
         public DbSet<Pskill> Pskills { get; set; }
         public DbSet<Project> Projects { get; set; }
         public DbSet<ProjectImage> ProjectImages { get; set; }
-
+        public DbSet<ProjectSkill> ProjectSkills { get; set; }
+        public DbSet<ProjectFeature> ProjectFeatures { get; set; }
 
 
 
 
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+                : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
 
@@ -51,6 +52,25 @@ namespace folio.Models
         {
             return new ApplicationDbContext();
         }
+
+        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        //{
+
+
+        //    modelBuilder.Entity<Project>()
+        //            .HasMany(s => s.Pskills)
+        //            .WithMany(c => c.Projects)
+        //            .Map(cs =>
+        //                    {
+        //                        cs.MapLeftKey("ProjectId");
+        //                        cs.MapRightKey("SkillId");
+        //                        cs.ToTable("ProjectSkills");
+        //                    });
+        //    base.OnModelCreating(modelBuilder);
+        //}
+
+
+
 
     }
 }

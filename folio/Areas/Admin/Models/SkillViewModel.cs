@@ -1,4 +1,5 @@
-﻿using System;
+﻿using folio.Areas.Portfolio.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -11,6 +12,7 @@ namespace folio.Areas.Admin.Models
 {
     public class SkillViewModel
     {
+        public int Id { get; set; }
 
 
         [Required]
@@ -25,29 +27,20 @@ namespace folio.Areas.Admin.Models
 
         [NotMapped]
         public List<HttpPostedFileBase> ImageFiles { get; set; }
-        [MaxLength(2)]
+
+        public HttpPostedFileBase ImageFile { get; set; }
+
+
+        public virtual List<Pimage> Pimages { get; set; }
+
+        public List<Project> Projects { get; set; }
+
+
+
         [DisplayName("Strength(Out of 10)")]
         public int Strength { get; set; }
     }
 
 
-    public static class ImageHelper
-    {
-        public static MvcHtmlString Image(this HtmlHelper helper, string src, string altText, string height)
 
-        {
-
-            var builder = new TagBuilder("img");
-
-            builder.MergeAttribute("src", src);
-
-            builder.MergeAttribute("alt", altText);
-
-            builder.MergeAttribute("height", height);
-
-            return MvcHtmlString.Create(builder.ToString(TagRenderMode.SelfClosing));
-
-        }
-
-    }
 }

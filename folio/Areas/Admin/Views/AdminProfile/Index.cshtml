@@ -61,7 +61,8 @@
                             <div class="form-group">
                                 @Html.LabelFor(m => m.FirstName, new { @class = "col-md-2 control-label" })
                                 <div class="col-md-10">
-                                    @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+                                    @*@Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })*@
+                                    @Html.EditorFor(m => m.FirstName, new { htmlAttributes = new { @class = "form-control" } })
                                     @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -69,7 +70,8 @@
                             <div class="form-group">
                                 @Html.LabelFor(m => m.LastName, new { @class = "col-md-2 control-label" })
                                 <div class="col-md-10">
-                                    @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+                                    @*@Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })*@
+                                    @Html.EditorFor(m => m.LastName, new { htmlAttributes = new { @class = "form-control" } })
                                     @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -77,15 +79,18 @@
                             <div class="form-group">
                                 @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
                                 <div class="col-md-10">
-                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control disabled" })
+                                    @*@Html.TextBoxFor(m => m.Email, new { @class = "form-control disabled" })*@
+                                    @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "form-control" } })
                                     @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 @Html.LabelFor(m => m.Phone, new { @class = "col-md-2 control-label" })
                                 <div class="col-md-10">
-                                    @Html.TextBoxFor(m => m.Phone, new { @class = "form-control" })
+                                    @*@Html.TextBoxFor(m => m.Phone, new { @class = "form-control" })*@
+                                    @Html.EditorFor(m => m.Phone, new { htmlAttributes = new { @class = "form-control" } })
                                     @Html.ValidationMessageFor(m => m.Phone, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -93,7 +98,8 @@
                             <div class="form-group">
                                 @Html.LabelFor(m => m.CurrentAddress, new { @class = "col-md-2 control-label" })
                                 <div class="col-md-10">
-                                    @Html.TextBoxFor(m => m.CurrentAddress, new { @class = "form-control" })
+                                    @*@Html.TextBoxFor(m => m.CurrentAddress, new { @class = "form-control" })*@
+                                    @Html.EditorFor(m => m.CurrentAddress, new { htmlAttributes = new { @class = "form-control" } })
                                     @Html.ValidationMessageFor(m => m.CurrentAddress, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -101,7 +107,8 @@
                             <div class="form-group">
                                 @Html.LabelFor(m => m.PermanentAddress, new { @class = "col-md-2 control-label" })
                                 <div class="col-md-10">
-                                    @Html.TextBoxFor(m => m.PermanentAddress, new { @class = "form-control" })
+                                    @*@Html.TextBoxFor(m => m.PermanentAddress, new { @class = "form-control" })*@
+                                    @Html.EditorFor(m => m.PermanentAddress, new { htmlAttributes = new { @class = "form-control" } })
                                     @Html.ValidationMessageFor(m => m.PermanentAddress, "", new { @class = "text-danger" })
                                 </div>
                             </div>

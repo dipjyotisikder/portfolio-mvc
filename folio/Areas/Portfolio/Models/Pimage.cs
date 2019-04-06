@@ -13,6 +13,7 @@ namespace folio.Areas.Portfolio.Models
 
 
         public int SkillId { get; set; }
+
         [ForeignKey("SkillId")]
         public Pskill Skill { get; set; }
 

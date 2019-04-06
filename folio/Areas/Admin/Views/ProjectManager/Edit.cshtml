@@ -1,0 +1,188 @@
+﻿@model folio.Areas.Admin.Models.ProjectViewModel
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_adminlayout.cshtml";
+}
+
+<style>
+    .fileUpload {
+        position: relative;
+        overflow: hidden;
+    }
+
+        .fileUpload input.upload {
+            position: absolute;
+            top: 0;
+            right: 0;
+            margin: 0;
+            padding: 0;
+            padding: 0;
+            font-size: 20px;
+            cursor: pointer;
+            opacity: 0;
+            filter: alpha(opacity=0);
+        }
+</style>
+
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Edit Project
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="#">Tables</a></li>
+            <li class="active">Data tables</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+        <div class="row">
+            <div class="col-xs-6">
+                <!-- general form elements -->
+                <div class="box box-primary">
+
+                    <!-- /.box-header -->
+                    <!-- form start -->
+                    @using (Html.BeginForm("Edit", "Projectmanager", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="box-body">
+                            <div class="form-group">
+                                <div class="modal">
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    @if (ViewBag.error != null)
+                                    {
+                                        <span>@ViewBag.error</span>
+                                    }
+                                </div>
+
+                            </div>
+                            @Html.HiddenFor(c => c.Id)
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="exampleInputFile">Select Image</label>
+                                <input name="ImageFile" type="file" class="upload up" id="imgUp" /><br />
+                            </div>
+
+                        </div>
+                        <!-- /.box-body -->
+
+
+                        <div class="box-footer">
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    }
+                </div>
+                <!-- /.box -->
+
+            </div>
+            <!-- /.col -->
+            <div class="col-md-6">
+
+                <!-- general form elements -->
+                <div class="box box-primary">
+                    <div class="box-body">
+
+                        <div class="row">
+                            @foreach (var img in Model.ProjectImages)
+                            {
+                                <div class="col-md-4">
+                                    <img src="@img.ImageUrl" alt="Image" style="max-width:100px;max-height:100px" />
+                                    @Html.ActionLink("Delete", "RemovePic", "SkillsManager", new { id = img.Id }, new { hidefocus = "hidefocus" })
+                                    @{
+                                        TempData["id"] = Model.Id;
+                                    }
+                                </div>
+                            }
+                        </div><!--row-->
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- /.row -->
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <!-- general form elements -->
+                <div class="box box-primary">
+                    <div class="box-header">
+                        <h3 class="text-center">Add/Remove Skills</h3>
+                    </div>
+                    <div class="box-body">
+
+                        <div class="row">
+                            @using (Html.BeginForm("AddSkill", "ProjectManager", new { area = "Admin", id = Model.Id }))
+                            {
+                                <div class="col-md-4">
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                    @Html.HiddenFor(c => c.AddSkillViewModel.ProjectId)
+                                    @Html.DropDownListFor(model => model.AddSkillViewModel.SkillId, new SelectList(Model.TotalSkills, "Id", "Name"), "Select Skill", new { @class = "form-control" })
+
+                                    <br />
+                                    <button type="submit" class="btn btn-default"> Add Skill</button>
+                                </div>
+                            }
+
+
+
+                            @foreach (var psItem in Model.ProjectSkills)
+                            {
+                                var data = Model.TotalSkills.Where(c => c.Id == psItem.SkillId).Select(c => c.Name).SingleOrDefault();
+
+                                <div class="col-md-2 text-center">
+
+                                    <h4>@data</h4>
+                                    @*@Html.ActionLink("Delete", "RemoveSkill", "SkillsManager", new { id = psItem.Pskill.Id, pid = Model.Id }, new { hidefocus = "hidefocus" })*@
+                                    @*<a class="btn-link" href="/Admin/SkillsManager/RemoveSkill/pid?@psItem.Pskill.Id/id?@Model.Id">Delete</a>*@
+
+
+                                    @using (Html.BeginForm("RemoveSkill", "ProjectManager", new { area = "Admin", id = Model.Id }))
+                                    {
+                                        <div class="col-md-4">
+                                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                            @Html.HiddenFor(c => c.AddSkillViewModel.ProjectId)
+                                            @Html.HiddenFor(c => c.AddSkillViewModel.SkillId, new { Value = psItem.Pskill.Id })
+
+                                            <br />
+                                            <button type="submit" class="btn btn-default"> Remove Skill</button>
+                                        </div>
+                                    }
+                                </div>
+                            }
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+    </section>
+    <!-- /.content -->
+
+</div>
+
+
+

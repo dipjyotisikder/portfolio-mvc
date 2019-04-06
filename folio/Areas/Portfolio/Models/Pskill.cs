@@ -13,6 +13,7 @@ namespace folio.Areas.Portfolio.Models
         public Pskill()
         {
             Pimages = new List<Pimage>();
+            ProjectSkills = new List<ProjectSkill>();
         }
 
         public int Id { get; set; }
@@ -22,11 +23,13 @@ namespace folio.Areas.Portfolio.Models
 
 
         public int CategoryId { get; set; }
-        [ForeignKey("CategoryId")]
 
+        [ForeignKey("CategoryId")]
         public virtual Pcategory Category { get; set; }
 
         public virtual List<Pimage> Pimages { get; set; }
+        public List<ProjectSkill> ProjectSkills { get; set; }
+
 
     }
 }

@@ -84,15 +84,15 @@ namespace folio.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser
-                {
-                    FirstName = model.FirstName,
-                    LastName = model.LastName,
-                    PhoneNumber = model.Phone,
-                    CurrentAddress = model.CurrentAddress,
-                    PermanentAddress = model.PermanentAddress,
-                    UserName = User.Identity.Name
-                };
+                //var user = new ApplicationUser
+                //{
+                //    FirstName = model.FirstName,
+                //    LastName = model.LastName,
+                //    PhoneNumber = model.Phone,
+                //    CurrentAddress = model.CurrentAddress,
+                //    PermanentAddress = model.PermanentAddress,
+                //    UserName = User.Identity.Name
+                //};
 
                 //var currentUser = await UserManager.FindByNameAsync(User.Identity.Name);
                 //currentUser = user;
@@ -101,10 +101,17 @@ namespace folio.Areas.Admin.Controllers
                 var store = new UserStore<ApplicationUser>(new ApplicationDbContext());
                 var manager = new UserManager<ApplicationUser>(store);
 
-                var usert = await manager.FindByIdAsync(User.Identity.GetUserId());
+                var updatedUser = await manager.FindByIdAsync(User.Identity.GetUserId());
 
-                usert = user;
-                var result = await manager.UpdateAsync(usert);
+                updatedUser.FirstName = model.FirstName;
+                updatedUser.LastName = model.LastName;
+                updatedUser.CurrentAddress = model.CurrentAddress;
+                updatedUser.PhoneNumber = model.Phone;
+                updatedUser.PermanentAddress = model.PermanentAddress;
+
+                await manager.UpdateAsync(updatedUser);
+
+                return RedirectToAction("Index");
 
             }
 
@@ -144,7 +151,7 @@ namespace folio.Areas.Admin.Controllers
             {
 
                 GetImageUrl getImageUrl = new GetImageUrl();
-                string Url = getImageUrl.Get(model.ImageFile, utilityBase);
+                string Url = getImageUrl.Get(model.ImageFile);
 
 
                 //string filename = Path.GetFileNameWithoutExtension(model.ImageFile.FileName);

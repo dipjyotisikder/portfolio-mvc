@@ -1,0 +1,7 @@
+﻿web:
+<add name="MyDb" connectionString="Server=tcp:dipjyotiserver.database.windows.net,1433;Initial Catalog=portfoliodb;Persist Security Info=False;User ID={your_username};Password={your_password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;" providerName="System.Data.SqlClient"/>
+
+
+
+local:
+    <add name="DefaultConnection" connectionString="Data Source=(LocalDb)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\aspnet-folio.mdf;Initial Catalog=aspnet-folio-20190314093043;Integrated Security=True" providerName="System.Data.SqlClient" />

@@ -1,31 +1,133 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@model folio.Areas.Portfolio.Models.ViewModels.HomeViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+<!--================Home Banner Area =================-->
+<section class="home_banner_area">
+    <div class="banner_inner">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="home_left_img">
+                        <img class="mypic" src="~/Content/Portfolio/img/banner/DipjyotiSquareSize2.png" alt="">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="banner_content">
+                        <h3>Hey,</h3>
+                        <h5>This is me</h5>
+                        <h2>Dipjyoti Sikder</h2>
+                        <p class="text-justify">
+                            A Creative Learner, Coder and Thinker.
+                        </p>
+                        <a href="#" class="genric-btn primary circle arrow">Visit Projects<span class="lnr lnr-arrow-right"></span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+</section>
+<!--================End Home Banner Area =================-->
+<!--================Welcome Area =================-->
+<section class="welcome_area p_120">
+    <div class="container">
+        <div class="row welcome_inner">
+            <div class="col-lg-6">
+                <div class="welcome_text">
+                    <h4>About Myself</h4>
+                    <p class="text-justify">
+                        Experienced developer with a demonstrated
+                        history of working in the ASP.Net MVC and ASP.Net Core web development.
+                        Business oriented personality having the knowledge of the current business flow in my country and a perfect individual for generating new ideas.
+                        Love to be a thinker more than being anything else.
+                    </p>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="wel_item">
+                                <i class="lnr lnr-database"></i>
+                                <h4>$2.5M</h4>
+                                <p>Total Donation</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="wel_item">
+                                <i class="lnr lnr-book"></i>
+                                <h4>@Model.Projects.ToList().Count</h4>
+                                <p>Total Projects</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="wel_item">
+                                <i class="lnr lnr-users"></i>
+                                <h4>3965</h4>
+                                <p>Total Volunteers</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="tools_expert">
+                    <h3>Expertise Areas</h3>
+                    <div class="skill_main">
+                        @{
+                            foreach (var item in Model.Pskills)
+                            {
+
+                                item.Strength = item.Strength * 10;
+                                <div class="skill_item">
+                                    <h4>@item.Name  (<span class="counter">@item.Strength</span>%)</h4>
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="@item.Strength" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            }
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+</section>
+<!--================End Welcome Area =================-->
+<!--================Feature Area =================-->
+<section class="feature_area p_120">
+    <div class="container">
+        <div class="main_title">
+            <h2>offerings to my clients</h2>
+            <p>If you are looking at blank cassettes on the web, you may be very confused at the difference in price. You may see some for as low as $.17 each.</p>
+        </div>
+
+
+        <div class="feature_inner row">
+
+            @foreach (var item in Model.Projects)
+            {
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature_item">
+                        <img class="img-responsive projectpic" src="~/Content/Portfolio/img/banner/DipjyotiSquareSize2.png"></img>
+                        <h4>@Html.ActionLink(item.Name, "SingleProject", "Home", new { id = item.Id }, new { hidefocus = "hidefocus" }) </h4>
+                        <p>@item.Description</p>
+                    </div>
+                </div>
+            }
+
+
+            @*<div class="col-lg-4 col-md-6">
+                    <div class="feature_item">
+                        <i class="flaticon-skyline"></i>
+                        <h4>Interior Design</h4>
+                        <p>If you are looking at blank cassettes on the web, you may be very confused at the difference in price. You may see some for as low as $17 each.</p>
+                    </div>
+                </div>*@
+
+
+        </div>
     </div>
-</div>
+</section>
+<!--================End Feature Area =================-->

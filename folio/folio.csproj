@@ -45,12 +45,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=8.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.8.0.0\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -187,35 +193,44 @@
     <Compile Include="Areas\Admin\Controllers\AdminHomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminProfileController.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoryManagerController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProjectManagerController.cs" />
     <Compile Include="Areas\Admin\Controllers\SkillsManagerController.cs" />
+    <Compile Include="Areas\Admin\Models\AddSkillViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\IndexVM.cs" />
     <Compile Include="Areas\Admin\Models\ProfileViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\ProjectViewModel.cs" />
     <Compile Include="Areas\Admin\Models\SkillViewModel.cs" />
-    <Compile Include="Areas\Portfolio\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Portfolio\Models\ProjectFeature.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Areas\Portfolio\Models\Pcategory.cs" />
     <Compile Include="Areas\Portfolio\Models\Pimage.cs" />
     <Compile Include="Areas\Portfolio\Models\Project.cs" />
+    <Compile Include="Areas\Portfolio\Models\ProjectSkill.cs" />
     <Compile Include="Areas\Portfolio\Models\Pskill.cs" />
     <Compile Include="Areas\Portfolio\Models\ViewModels\HomeViewModel.cs" />
     <Compile Include="Areas\Portfolio\PortfolioAreaRegistration.cs" />
     <Compile Include="Areas\Portfolio\Services\ImgUploader.cs" />
     <Compile Include="Areas\Portfolio\Services\Reverse.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201903141649315_Initial.cs" />
-    <Compile Include="Migrations\201903141649315_Initial.Designer.cs">
-      <DependentUpon>201903141649315_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201903281820552_init.cs" />
+    <Compile Include="Migrations\201903281820552_init.Designer.cs">
+      <DependentUpon>201903281820552_init.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201903151024598_secondMigration.cs" />
-    <Compile Include="Migrations\201903151024598_secondMigration.Designer.cs">
-      <DependentUpon>201903151024598_secondMigration.cs</DependentUpon>
+    <Compile Include="Migrations\201903281948094_init2.cs" />
+    <Compile Include="Migrations\201903281948094_init2.Designer.cs">
+      <DependentUpon>201903281948094_init2.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201903231104341_AddProjectModel.cs" />
-    <Compile Include="Migrations\201903231104341_AddProjectModel.Designer.cs">
-      <DependentUpon>201903231104341_AddProjectModel.cs</DependentUpon>
+    <Compile Include="Migrations\201903282254313_addNew.cs" />
+    <Compile Include="Migrations\201903282254313_addNew.Designer.cs">
+      <DependentUpon>201903282254313_addNew.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904060847101_AddTableProjectFeature.cs" />
+    <Compile Include="Migrations\201904060847101_AddTableProjectFeature.Designer.cs">
+      <DependentUpon>201904060847101_AddTableProjectFeature.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -257,13 +272,210 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Portfolio\css\bootstrap.css" />
+    <Content Include="Content\Portfolio\css\breadcrumb.css" />
+    <Content Include="Content\Portfolio\css\font-awesome.min.css" />
+    <Content Include="Content\Portfolio\css\MyRules.css" />
+    <Content Include="Content\Portfolio\css\responsive.css" />
+    <Content Include="Content\Portfolio\css\style.css" />
+    <Content Include="Content\Portfolio\css\_about.css" />
+    <Content Include="Content\Portfolio\css\_event.css" />
+    <Content Include="Content\Portfolio\css\_feature.css" />
+    <Content Include="Content\Portfolio\css\_footer.css" />
+    <Content Include="Content\Portfolio\css\_price.css" />
+    <Content Include="Content\Portfolio\css\_projects.css" />
+    <Content Include="Content\Portfolio\css\_service.css" />
+    <Content Include="Content\Portfolio\css\_team.css" />
+    <Content Include="Content\Portfolio\css\_testimonials.css" />
+    <Content Include="Content\Portfolio\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\Portfolio\img\banner\banner-2.jpg" />
+    <Content Include="Content\Portfolio\img\banner\banner-map.png" />
+    <Content Include="Content\Portfolio\img\banner\banner.jpg" />
+    <Content Include="Content\Portfolio\img\banner\DipjyotiSquareSize2.png" />
+    <Content Include="Content\Portfolio\img\banner\home-banner.jpg" />
+    <Content Include="Content\Portfolio\img\banner\home-left-1.png" />
+    <Content Include="Content\Portfolio\img\blog\add.jpg" />
+    <Content Include="Content\Portfolio\img\blog\author.png" />
+    <Content Include="Content\Portfolio\img\blog\c1.jpg" />
+    <Content Include="Content\Portfolio\img\blog\c2.jpg" />
+    <Content Include="Content\Portfolio\img\blog\c3.jpg" />
+    <Content Include="Content\Portfolio\img\blog\c4.jpg" />
+    <Content Include="Content\Portfolio\img\blog\c5.jpg" />
+    <Content Include="Content\Portfolio\img\blog\c6.jpg" />
+    <Content Include="Content\Portfolio\img\blog\cat-post\cat-post-1.jpg" />
+    <Content Include="Content\Portfolio\img\blog\cat-post\cat-post-2.jpg" />
+    <Content Include="Content\Portfolio\img\blog\cat-post\cat-post-3.jpg" />
+    <Content Include="Content\Portfolio\img\blog\causes\causes-1.jpg" />
+    <Content Include="Content\Portfolio\img\blog\causes\causes-2.jpg" />
+    <Content Include="Content\Portfolio\img\blog\causes\causes-3.jpg" />
+    <Content Include="Content\Portfolio\img\blog\feature-img1.jpg" />
+    <Content Include="Content\Portfolio\img\blog\home-blog\home-blog-1.jpg" />
+    <Content Include="Content\Portfolio\img\blog\home-blog\home-blog-2.jpg" />
+    <Content Include="Content\Portfolio\img\blog\home-blog\home-blog-3.jpg" />
+    <Content Include="Content\Portfolio\img\blog\main-blog\m-blog-1.jpg" />
+    <Content Include="Content\Portfolio\img\blog\main-blog\m-blog-2.jpg" />
+    <Content Include="Content\Portfolio\img\blog\main-blog\m-blog-3.jpg" />
+    <Content Include="Content\Portfolio\img\blog\main-blog\m-blog-4.jpg" />
+    <Content Include="Content\Portfolio\img\blog\main-blog\m-blog-5.jpg" />
+    <Content Include="Content\Portfolio\img\blog\next.jpg" />
+    <Content Include="Content\Portfolio\img\blog\popular-post\post1.jpg" />
+    <Content Include="Content\Portfolio\img\blog\popular-post\post2.jpg" />
+    <Content Include="Content\Portfolio\img\blog\popular-post\post3.jpg" />
+    <Content Include="Content\Portfolio\img\blog\popular-post\post4.jpg" />
+    <Content Include="Content\Portfolio\img\blog\post-img1.jpg" />
+    <Content Include="Content\Portfolio\img\blog\post-img2.jpg" />
+    <Content Include="Content\Portfolio\img\blog\prev.jpg" />
+    <Content Include="Content\Portfolio\img\elements\a.jpg" />
+    <Content Include="Content\Portfolio\img\elements\a2.jpg" />
+    <Content Include="Content\Portfolio\img\elements\d.jpg" />
+    <Content Include="Content\Portfolio\img\elements\disabled-check.png" />
+    <Content Include="Content\Portfolio\img\elements\disabled-radio.png" />
+    <Content Include="Content\Portfolio\img\elements\f1.jpg" />
+    <Content Include="Content\Portfolio\img\elements\f2.jpg" />
+    <Content Include="Content\Portfolio\img\elements\f3.jpg" />
+    <Content Include="Content\Portfolio\img\elements\f4.jpg" />
+    <Content Include="Content\Portfolio\img\elements\f5.jpg" />
+    <Content Include="Content\Portfolio\img\elements\f6.jpg" />
+    <Content Include="Content\Portfolio\img\elements\f7.jpg" />
+    <Content Include="Content\Portfolio\img\elements\f8.jpg" />
+    <Content Include="Content\Portfolio\img\elements\g1.jpg" />
+    <Content Include="Content\Portfolio\img\elements\g2.jpg" />
+    <Content Include="Content\Portfolio\img\elements\g3.jpg" />
+    <Content Include="Content\Portfolio\img\elements\g4.jpg" />
+    <Content Include="Content\Portfolio\img\elements\g5.jpg" />
+    <Content Include="Content\Portfolio\img\elements\g6.jpg" />
+    <Content Include="Content\Portfolio\img\elements\g7.jpg" />
+    <Content Include="Content\Portfolio\img\elements\g8.jpg" />
+    <Content Include="Content\Portfolio\img\elements\primary-check.png" />
+    <Content Include="Content\Portfolio\img\elements\primary-radio.png" />
+    <Content Include="Content\Portfolio\img\elements\success-check.png" />
+    <Content Include="Content\Portfolio\img\elements\success-radio.png" />
+    <Content Include="Content\Portfolio\img\elements\user1.png" />
+    <Content Include="Content\Portfolio\img\elements\user2.png" />
+    <Content Include="Content\Portfolio\img\favicon.png" />
+    <Content Include="Content\Portfolio\img\gallery\portfolio_details.jpg" />
+    <Content Include="Content\Portfolio\img\instagram\Image-01.jpg" />
+    <Content Include="Content\Portfolio\img\instagram\Image-02.jpg" />
+    <Content Include="Content\Portfolio\img\instagram\Image-03.jpg" />
+    <Content Include="Content\Portfolio\img\instagram\Image-04.jpg" />
+    <Content Include="Content\Portfolio\img\instagram\Image-05.jpg" />
+    <Content Include="Content\Portfolio\img\instagram\Image-06.jpg" />
+    <Content Include="Content\Portfolio\img\instagram\Image-07.jpg" />
+    <Content Include="Content\Portfolio\img\instagram\Image-08.jpg" />
+    <Content Include="Content\Portfolio\img\logo 2.png" />
+    <Content Include="Content\Portfolio\img\logo-2.png" />
+    <Content Include="Content\Portfolio\img\logo.png" />
+    <Content Include="Content\Portfolio\img\projects\projects-1.jpg" />
+    <Content Include="Content\Portfolio\img\projects\projects-2.jpg" />
+    <Content Include="Content\Portfolio\img\projects\projects-3.jpg" />
+    <Content Include="Content\Portfolio\img\projects\projects-4.jpg" />
+    <Content Include="Content\Portfolio\img\projects\projects-5.jpg" />
+    <Content Include="Content\Portfolio\img\projects\projects-6.jpg" />
+    <Content Include="Content\Portfolio\img\team\team-1.jpg" />
+    <Content Include="Content\Portfolio\img\team\team-2.jpg" />
+    <Content Include="Content\Portfolio\img\team\team-3.jpg" />
+    <Content Include="Content\Portfolio\img\team\team-4.jpg" />
+    <Content Include="Content\Portfolio\js\bootstrap.min.js" />
+    <Content Include="Content\Portfolio\js\contact.js" />
+    <Content Include="Content\Portfolio\js\custom.js" />
+    <Content Include="Content\Portfolio\js\gmaps.min.js" />
+    <Content Include="Content\Portfolio\js\isotope-min.js" />
+    <Content Include="Content\Portfolio\js\jquery-3.2.1.min.js" />
+    <Content Include="Content\Portfolio\js\jquery.ajaxchimp.min.js" />
+    <Content Include="Content\Portfolio\js\jquery.form.js" />
+    <Content Include="Content\Portfolio\js\jquery.validate.min.js" />
+    <Content Include="Content\Portfolio\js\mail-script.js" />
+    <Content Include="Content\Portfolio\js\popper.js" />
+    <Content Include="Content\Portfolio\js\stellar.js" />
+    <Content Include="Content\Portfolio\js\theme.js" />
+    <Content Include="Content\Portfolio\Ronin-doc\css\font-awesome.min.css" />
+    <Content Include="Content\Portfolio\Ronin-doc\css\main.css" />
+    <Content Include="Content\Portfolio\Ronin-doc\css\normalize.min.css" />
+    <Content Include="Content\Portfolio\Ronin-doc\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\Portfolio\Ronin-doc\img\logo.png" />
+    <Content Include="Content\Portfolio\Ronin-doc\index.html" />
+    <Content Include="Content\Portfolio\Ronin-doc\js\custom.js" />
+    <Content Include="Content\Portfolio\Ronin-doc\js\jquery-1.11.0.min.js" />
+    <Content Include="Content\Portfolio\Ronin-doc\js\jquery.nav.js" />
+    <Content Include="Content\Portfolio\Ronin-doc\syntax-highlighter\scripts\shAutoloader.js" />
+    <Content Include="Content\Portfolio\Ronin-doc\syntax-highlighter\scripts\shBrushAppleScript.js" />
+    <Content Include="Content\Portfolio\Ronin-doc\syntax-highlighter\scripts\shBrushAS3.js" />
+    <Content Include="Content\Portfolio\Ronin-doc\syntax-highlighter\scripts\shBrushBash.js" />
+    <Content Include="Content\Portfolio\Ronin-doc\syntax-highlighter\scripts\shBrushColdFusion.js" />
+    <Content Include="Content\Portfolio\Ronin-doc\syntax-highlighter\scripts\shBrushCpp.js" />
+    <Content Include="Content\Portfolio\Ronin-doc\syntax-highlighter\scripts\shBrushCSharp.js" />
+    <Content Include="Content\Portfolio\Ronin-doc\syntax-highlighter\scripts\shBrushCss.js" />
+    <Content Include="Content\Portfolio\Ronin-doc\syntax-highlighter\scripts\shBrushDelphi.js" />
+    <Content Include="Content\Portfolio\Ronin-doc\syntax-highlighter\scripts\shBrushDiff.js" />
+    <Content Include="Content\Portfolio\Ronin-doc\syntax-highlighter\scripts\shBrushErlang.js" />
+    <Content Include="Content\Portfolio\Ronin-doc\syntax-highlighter\scripts\shBrushGroovy.js" />
+    <Content Include="Content\Portfolio\Ronin-doc\syntax-highlighter\scripts\shBrushJava.js" />
+    <Content Include="Content\Portfolio\Ronin-doc\syntax-highlighter\scripts\shBrushJavaFX.js" />
+    <Content Include="Content\Portfolio\Ronin-doc\syntax-highlighter\scripts\shBrushJScript.js" />
+    <Content Include="Content\Portfolio\Ronin-doc\syntax-highlighter\scripts\shBrushPerl.js" />
+    <Content Include="Content\Portfolio\Ronin-doc\syntax-highlighter\scripts\shBrushPhp.js" />
+    <Content Include="Content\Portfolio\Ronin-doc\syntax-highlighter\scripts\shBrushPlain.js" />
+    <Content Include="Content\Portfolio\Ronin-doc\syntax-highlighter\scripts\shBrushPowerShell.js" />
+    <Content Include="Content\Portfolio\Ronin-doc\syntax-highlighter\scripts\shBrushPython.js" />
+    <Content Include="Content\Portfolio\Ronin-doc\syntax-highlighter\scripts\shBrushRuby.js" />
+    <Content Include="Content\Portfolio\Ronin-doc\syntax-highlighter\scripts\shBrushSass.js" />
+    <Content Include="Content\Portfolio\Ronin-doc\syntax-highlighter\scripts\shBrushScala.js" />
+    <Content Include="Content\Portfolio\Ronin-doc\syntax-highlighter\scripts\shBrushSql.js" />
+    <Content Include="Content\Portfolio\Ronin-doc\syntax-highlighter\scripts\shBrushVb.js" />
+    <Content Include="Content\Portfolio\Ronin-doc\syntax-highlighter\scripts\shBrushXml.js" />
+    <Content Include="Content\Portfolio\Ronin-doc\syntax-highlighter\scripts\shCore.js" />
+    <Content Include="Content\Portfolio\Ronin-doc\syntax-highlighter\scripts\shLegacy.js" />
+    <Content Include="Content\Portfolio\Ronin-doc\syntax-highlighter\styles\shCore.css" />
+    <Content Include="Content\Portfolio\Ronin-doc\syntax-highlighter\styles\shCoreDefault.css" />
+    <Content Include="Content\Portfolio\Ronin-doc\syntax-highlighter\styles\shCoreDjango.css" />
+    <Content Include="Content\Portfolio\Ronin-doc\syntax-highlighter\styles\shCoreEclipse.css" />
+    <Content Include="Content\Portfolio\Ronin-doc\syntax-highlighter\styles\shCoreEmacs.css" />
+    <Content Include="Content\Portfolio\Ronin-doc\syntax-highlighter\styles\shCoreFadeToGrey.css" />
+    <Content Include="Content\Portfolio\Ronin-doc\syntax-highlighter\styles\shCoreMDUltra.css" />
+    <Content Include="Content\Portfolio\Ronin-doc\syntax-highlighter\styles\shCoreMidnight.css" />
+    <Content Include="Content\Portfolio\Ronin-doc\syntax-highlighter\styles\shCoreRDark.css" />
+    <Content Include="Content\Portfolio\Ronin-doc\syntax-highlighter\styles\shThemeDefault.css" />
+    <Content Include="Content\Portfolio\Ronin-doc\syntax-highlighter\styles\shThemeDjango.css" />
+    <Content Include="Content\Portfolio\Ronin-doc\syntax-highlighter\styles\shThemeEclipse.css" />
+    <Content Include="Content\Portfolio\Ronin-doc\syntax-highlighter\styles\shThemeEmacs.css" />
+    <Content Include="Content\Portfolio\Ronin-doc\syntax-highlighter\styles\shThemeFadeToGrey.css" />
+    <Content Include="Content\Portfolio\Ronin-doc\syntax-highlighter\styles\shThemeMDUltra.css" />
+    <Content Include="Content\Portfolio\Ronin-doc\syntax-highlighter\styles\shThemeMidnight.css" />
+    <Content Include="Content\Portfolio\Ronin-doc\syntax-highlighter\styles\shThemeRDark.css" />
+    <Content Include="Content\Portfolio\vendors\animate-css\animate.css" />
+    <Content Include="Content\Portfolio\vendors\animate-css\wow.min.js" />
+    <Content Include="Content\Portfolio\vendors\bootstrap-datepicker\bootstrap-datetimepicker.min.css" />
+    <Content Include="Content\Portfolio\vendors\bootstrap-datepicker\bootstrap-datetimepicker.min.js" />
+    <Content Include="Content\Portfolio\vendors\bootstrap-datepicker\bootstrap-select.css" />
+    <Content Include="Content\Portfolio\vendors\bootstrap-datepicker\bootstrap-select.js" />
+    <Content Include="Content\Portfolio\vendors\counter-up\jquery.counterup.min.js" />
+    <Content Include="Content\Portfolio\vendors\counter-up\jquery.waypoints.min.js" />
+    <Content Include="Content\Portfolio\vendors\flaticon\flaticon.css" />
+    <Content Include="Content\Portfolio\vendors\flaticon\Flaticon.svg" />
+    <Content Include="Content\Portfolio\vendors\flipclock\timer.js" />
+    <Content Include="Content\Portfolio\vendors\isotope\imagesloaded.pkgd.min.js" />
+    <Content Include="Content\Portfolio\vendors\isotope\isotope-min.js" />
+    <Content Include="Content\Portfolio\vendors\jquery-ui\jquery-ui.css" />
+    <Content Include="Content\Portfolio\vendors\jquery-ui\jquery-ui.js" />
+    <Content Include="Content\Portfolio\vendors\lightbox\simpleLightbox.css" />
+    <Content Include="Content\Portfolio\vendors\lightbox\simpleLightbox.min.js" />
+    <Content Include="Content\Portfolio\vendors\linericon\fonts\Linearicons-Free.svg" />
+    <Content Include="Content\Portfolio\vendors\linericon\style.css" />
+    <Content Include="Content\Portfolio\vendors\nice-select\css\nice-select.css" />
+    <Content Include="Content\Portfolio\vendors\nice-select\css\style.css" />
+    <Content Include="Content\Portfolio\vendors\nice-select\js\jquery.nice-select.js" />
+    <Content Include="Content\Portfolio\vendors\nice-select\js\jquery.nice-select.min.js" />
+    <Content Include="Content\Portfolio\vendors\owl-carousel\assets\ajax-loader.gif" />
+    <Content Include="Content\Portfolio\vendors\owl-carousel\assets\animated.css" />
+    <Content Include="Content\Portfolio\vendors\owl-carousel\assets\owl.carousel.css" />
+    <Content Include="Content\Portfolio\vendors\owl-carousel\owl.carousel.min.css" />
+    <Content Include="Content\Portfolio\vendors\owl-carousel\owl.carousel.min.js" />
+    <Content Include="Controllers\DeployHelp.txt" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Areas\Portfolio\Views\web.config" />
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Admin\Views\Shared\_adminlayout.cshtml" />
     <Content Include="Content\Admin\css\adminlte.min.css.map" />
@@ -316,11 +528,62 @@
     <Content Include="Areas\Admin\Views\CategoryManager\Index.cshtml" />
     <Content Include="Areas\Admin\Views\SkillsManager\Create.cshtml" />
     <Content Include="Areas\Admin\Views\SkillsManager\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\SkillsManager\Details.cshtml" />
     <Content Include="Areas\Admin\Views\SkillsManager\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\SkillsManager\Index.cshtml" />
-    <Content Include="Areas\Portfolio\Views\Home\Index.cshtml" />
-    <Content Include="Areas\Portfolio\Views\Home\_Skill.cshtml" />
+    <Content Include="Areas\Admin\Views\ProjectManager\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\ProjectManager\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\ProjectManager\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\ProjectManager\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\ProjectManager\Index.cshtml" />
+    <Content Include="Content\Portfolio\css\breadcrumb.css.map" />
+    <Content Include="Content\Portfolio\css\style.css.map" />
+    <Content Include="Content\Portfolio\css\_about.css.map" />
+    <Content Include="Content\Portfolio\css\_event.css.map" />
+    <Content Include="Content\Portfolio\css\_feature.css.map" />
+    <Content Include="Content\Portfolio\css\_footer.css.map" />
+    <Content Include="Content\Portfolio\css\_price.css.map" />
+    <Content Include="Content\Portfolio\css\_projects.css.map" />
+    <Content Include="Content\Portfolio\css\_service.css.map" />
+    <Content Include="Content\Portfolio\css\_team.css.map" />
+    <Content Include="Content\Portfolio\css\_testimonials.css.map" />
+    <Content Include="Content\Portfolio\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\Portfolio\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\Portfolio\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\Portfolio\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\Portfolio\fonts\FontAwesome.otf" />
+    <Content Include="Content\Portfolio\img\elements\_DS_Store" />
+    <Content Include="Content\Portfolio\Ronin-doc\css\_DS_Store" />
+    <Content Include="Content\Portfolio\Ronin-doc\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\Portfolio\Ronin-doc\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\Portfolio\Ronin-doc\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\Portfolio\Ronin-doc\fonts\FontAwesome.otf" />
+    <Content Include="Content\Portfolio\Ronin-doc\fonts\_DS_Store" />
+    <Content Include="Content\Portfolio\Ronin-doc\js\_DS_Store" />
+    <Content Include="Content\Portfolio\Ronin-doc\syntax-highlighter\_DS_Store" />
+    <Content Include="Content\Portfolio\scss\breadcrumb.scss" />
+    <Content Include="Content\Portfolio\scss\style.scss" />
+    <Content Include="Content\Portfolio\scss\_blog.scss" />
+    <Content Include="Content\Portfolio\scss\_button.scss" />
+    <Content Include="Content\Portfolio\scss\_contact.scss" />
+    <Content Include="Content\Portfolio\scss\_elements.scss" />
+    <Content Include="Content\Portfolio\scss\_feature.scss" />
+    <Content Include="Content\Portfolio\scss\_footer.scss" />
+    <Content Include="Content\Portfolio\scss\_header.scss" />
+    <Content Include="Content\Portfolio\scss\_predefine.scss" />
+    <Content Include="Content\Portfolio\scss\_projects.scss" />
+    <Content Include="Content\Portfolio\scss\_team.scss" />
+    <Content Include="Content\Portfolio\scss\_testimonials.scss" />
+    <Content Include="Content\Portfolio\scss\_variables.scss" />
+    <Content Include="Content\Portfolio\vendors\flaticon\Flaticon.eot" />
+    <Content Include="Content\Portfolio\vendors\flaticon\Flaticon.ttf" />
+    <Content Include="Content\Portfolio\vendors\flaticon\Flaticon.woff" />
+    <Content Include="Content\Portfolio\vendors\flaticon\_flaticon.scss" />
+    <Content Include="Content\Portfolio\vendors\linericon\fonts\Linearicons-Free.eot" />
+    <Content Include="Content\Portfolio\vendors\linericon\fonts\Linearicons-Free.ttf" />
+    <Content Include="Content\Portfolio\vendors\linericon\fonts\Linearicons-Free.woff" />
+    <Content Include="Content\Portfolio\vendors\linericon\fonts\Linearicons-Free.woff2" />
+    <None Include="Properties\PublishProfiles\diportfolio - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\diportfolio - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -332,7 +595,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -343,9 +608,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
@@ -366,10 +628,11 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\SingleProject.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Images\" />
-    <Folder Include="Areas\Portfolio\Views\Shared\PartialView\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -385,14 +648,17 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201903141649315_Initial.resx">
-      <DependentUpon>201903141649315_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201903281820552_init.resx">
+      <DependentUpon>201903281820552_init.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903151024598_secondMigration.resx">
-      <DependentUpon>201903151024598_secondMigration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201903281948094_init2.resx">
+      <DependentUpon>201903281948094_init2.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903231104341_AddProjectModel.resx">
-      <DependentUpon>201903231104341_AddProjectModel.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201903282254313_addNew.resx">
+      <DependentUpon>201903282254313_addNew.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904060847101_AddTableProjectFeature.resx">
+      <DependentUpon>201904060847101_AddTableProjectFeature.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

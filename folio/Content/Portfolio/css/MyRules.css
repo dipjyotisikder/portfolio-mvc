@@ -1,0 +1,44 @@
+﻿.mypic {
+    height: 500px;
+}
+
+.projectpic {
+    max-width: 310px;
+}
+
+.p_120 {
+    padding-top: 20px !important;
+    padding-bottom: 20px !important;
+}
+
+.banner_area .banner_inner {
+    min-height: 230px !important;
+}
+
+.banner_area {
+    min-height: 300px !important;
+}
+
+.footer_area {
+    background: #e3e6ff !important;
+}
+
+.f_title h3 {
+    color: #808080 !important;
+}
+
+.ab_widget p {
+    color: #808080 !important;
+}
+
+.news_widget p {
+    color: #808080 !important;
+}
+
+.banner_area .banner_inner {
+    background: none !important;
+}
+
+.social_widget .list li a {
+    color: #aa8d80 !important;
+}

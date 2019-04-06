@@ -1,44 +1,164 @@
-﻿<!DOCTYPE html>
-<html>
+﻿<!doctype html>
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="~/Content/Portfolio/img/favicon.png" type="image/png">
+    <title>Dipjyoti's Portfolio</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="~/Content/Portfolio/css/bootstrap.css">
+    <link rel="stylesheet" href="~/Content/Portfolio/vendors/linericon/style.css">
+    <link rel="stylesheet" href="~/Content/Portfolio/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/Content/Portfolio/vendors/owl-carousel/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/Content/Portfolio/vendors/lightbox/simpleLightbox.css">
+    <link rel="stylesheet" href="~/Content/Portfolio/vendors/nice-select/css/nice-select.css">
+    <link rel="stylesheet" href="~/Content/Portfolio/vendors/animate-css/animate.css">
+    <link rel="stylesheet" href="~/Content/Portfolio/vendors/flaticon/flaticon.css">
+    <!-- main css -->
+    <link rel="stylesheet" href="~/Content/Portfolio/css/style.css">
+    <link rel="stylesheet" href="~/Content/Portfolio/css/responsive.css">
+    <link href="~/Content/Portfolio/css/MyRules.css" rel="stylesheet" />
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+
+    <!--================Header Menu Area =================-->
+    <header class="header_area">
+        <div class="main_menu" id="mainNav">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div class="container box_1620">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <a class="navbar-brand logo_h" href="/"><h3>DIPJYOTI'S PORTFOLIO</h3></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav menu_nav ml-auto">
+                            @*<li class="nav-item active"><a class="nav-link" href="index.html">Home</a></li>*@
+                            <li class="nav-item"><a class="nav-link" href="about-us.html">About</a></li>
+                            <li class="nav-item"><a class="nav-link" href="services.html">Services</a>
+                            <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                            @*<li class="nav-item submenu dropdown">
+                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Pages</a>
+                                    <ul class="dropdown-menu">
+                                        <li class="nav-item"><a class="nav-link" href="portfolio.html">Portfolio</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="portfolio-details.html">Project Details</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="elements.html">Elements</a></li>
+                                    </ul>
+                                </li>*@
+
+
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <!--================Header Menu Area =================-->
+
+
+    @RenderBody()
+
+    <!--================Footer Area =================-->
+    <footer class="footer_area p_120">
         <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
+            <div class="row footer_inner">
+                <div class=" col-md-6">
+                    <aside class="f_widget ab_widget">
+                        <div class="f_title">
+                            <h3>About Me</h3>
+                        </div>
+                        <p>
+                            Copyright &copy; All Rights Reserved
+                        </p>
+                    </aside>
+                </div>
+
+                <div class=" col-md-6">
+                    <aside class="f_widget social_widget">
+                        <div class="f_title">
+                            <h3>Follow Me</h3>
+                        </div>
+                        <p>Let us be social</p>
+                        <ul class="list">
+                            <li><a href="https://www.facebook.com/dipjyoti07"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="https://www.linkedin.com/in/dipjyoti-sikder-b51a08144/"><i class="fa fa-linkedin"></i></a></li>
+                        </ul>
+                    </aside>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
-
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+    </footer>
+    <!--================End Footer Area =================-->
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="~/Content/Portfolio/js/jquery-3.2.1.min.js"></script>
+    <script src="~/Content/Portfolio/js/popper.js"></script>
+    <script src="~/Content/Portfolio/js/bootstrap.min.js"></script>
+    <script src="~/Content/Portfolio/js/stellar.js"></script>
+    <script src="~/Content/Portfolio/vendors/lightbox/simpleLightbox.min.js"></script>
+    <script src="~/Content/Portfolio/vendors/nice-select/js/jquery.nice-select.min.js"></script>
+    <script src="~/Content/Portfolio/vendors/isotope/imagesloaded.pkgd.min.js"></script>
+    <script src="~/Content/Portfolio/vendors/isotope/isotope-min.js"></script>
+    <script src="~/Content/Portfolio/vendors/owl-carousel/owl.carousel.min.js"></script>
+    <script src="~/Content/Portfolio/js/jquery.ajaxchimp.min.js"></script>
+    <script src="~/Content/Portfolio/vendors/counter-up/jquery.waypoints.min.js"></script>
+    <script src="~/Content/Portfolio/vendors/counter-up/jquery.counterup.min.js"></script>
+    <script src="~/Content/Portfolio/js/mail-script.js"></script>
+    <!--gmaps Js-->
+    <script src="~/Content/Portfolio/js/gmaps.min.js"></script>
+    <script src="~/Content/Portfolio/js/theme.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>
+
+
+
+
+@*<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>@ViewBag.Title - My ASP.NET Application</title>
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
+
+    </head>
+    <body>
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    </ul>
+                    @Html.Partial("_LoginPartial")
+                </div>
+            </div>
+        </div>
+        <div class="container body-content">
+            @RenderBody()
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            </footer>
+        </div>
+
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+    </body>
+    </html>*@
