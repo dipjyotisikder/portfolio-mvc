@@ -32,5 +32,8 @@ namespace folio.Areas.Admin.Models
         public Pskill Pskill { get; set; }
         public IEnumerable<Pskill> TotalSkills { get; set; }
 
+        public ProjectFeature ProjectFeature { get; set; }
+        public List<ProjectFeature> ProjectFeatures { get; set; }
+
     }
 }

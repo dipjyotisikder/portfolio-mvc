@@ -1,5 +1,7 @@
 ﻿@model folio.Areas.Admin.Models.ProjectViewModel
 @{
+    /**/
+
     ViewBag.Title = "Edit";
     Layout = "~/Areas/Admin/Views/Shared/_adminlayout.cshtml";
 }
@@ -104,12 +106,14 @@
                             @foreach (var img in Model.ProjectImages)
                             {
                                 <div class="col-md-4">
-                                    <img src="@img.ImageUrl" alt="Image" style="max-width:100px;max-height:100px" />
-                                    @Html.ActionLink("Delete", "RemovePic", "SkillsManager", new { id = img.Id }, new { hidefocus = "hidefocus" })
+                                    <img src="@img.ImageUrl" alt="Image" style="max-width:100px;max-height:100px;" />
                                     @{
                                         TempData["id"] = Model.Id;
-                                    }
+                                    } <br />
+                                    @Html.ActionLink("Delete", "RemovePic", "SkillsManager", new { id = img.Id }, new { hidefocus = "hidefocus", @class = "btn btn-default" })
+
                                 </div>
+
                             }
                         </div><!--row-->
 
@@ -119,6 +123,8 @@
             </div>
         </div>
         <!-- /.row -->
+
+
 
         <div class="row">
             <div class="col-md-12">
@@ -131,9 +137,10 @@
                     <div class="box-body">
 
                         <div class="row">
-                            @using (Html.BeginForm("AddSkill", "ProjectManager", new { area = "Admin", id = Model.Id }))
-                            {
-                                <div class="col-md-4">
+                            <div class="col-md-3">
+                                @using (Html.BeginForm("AddSkill", "ProjectManager", new { area = "Admin", id = Model.Id }))
+                                {
+
                                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
                                     @Html.HiddenFor(c => c.AddSkillViewModel.ProjectId)
@@ -141,42 +148,136 @@
 
                                     <br />
                                     <button type="submit" class="btn btn-default"> Add Skill</button>
-                                </div>
-                            }
 
+                                }
+                            </div>
 
+                            <div class="col-md-9">
+                                @foreach (var psItem in Model.ProjectSkills)
+                                {
+                                    var data = Model.TotalSkills.Where(c => c.Id == psItem.SkillId).Select(c => c.Name).SingleOrDefault();
 
-                            @foreach (var psItem in Model.ProjectSkills)
-                            {
-                                var data = Model.TotalSkills.Where(c => c.Id == psItem.SkillId).Select(c => c.Name).SingleOrDefault();
+                                    <div class="col-md-3 text-center">
 
-                                <div class="col-md-2 text-center">
+                                        <h4>@data</h4>
 
-                                    <h4>@data</h4>
-                                    @*@Html.ActionLink("Delete", "RemoveSkill", "SkillsManager", new { id = psItem.Pskill.Id, pid = Model.Id }, new { hidefocus = "hidefocus" })*@
-                                    @*<a class="btn-link" href="/Admin/SkillsManager/RemoveSkill/pid?@psItem.Pskill.Id/id?@Model.Id">Delete</a>*@
+                                        @using (Html.BeginForm("RemoveSkill", "ProjectManager", new { area = "Admin", id = Model.Id }))
+                                        {
 
-
-                                    @using (Html.BeginForm("RemoveSkill", "ProjectManager", new { area = "Admin", id = Model.Id }))
-                                    {
-                                        <div class="col-md-4">
                                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
                                             @Html.HiddenFor(c => c.AddSkillViewModel.ProjectId)
                                             @Html.HiddenFor(c => c.AddSkillViewModel.SkillId, new { Value = psItem.Pskill.Id })
 
-                                            <br />
-                                            <button type="submit" class="btn btn-default"> Remove Skill</button>
-                                        </div>
-                                    }
-                                </div>
-                            }
+                                            <button type="submit" class="btn btn-default"> Remove</button>
+                                        }
+                                    </div>
+                                }
+                            </div>
+
+
                         </div>
 
                     </div>
                 </div>
 
             </div>
+
+
+
+        </div>
+
+
+
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <!-- general form elements -->
+                <div class="box box-primary">
+                    <div class="box-header">
+                        <h3 class="text-center">Add/Remove Features</h3>
+                    </div>
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                @using (Html.BeginForm("AddFeature", "ProjectManager", new { area = "Admin" }, FormMethod.Post))
+                                {
+
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                    @Html.HiddenFor(c => c.Id)
+                                    <div class="form-group">
+                                        <label class="control-label"> Add Feature</label>
+                                        @Html.EditorFor(model => model.ProjectFeature.Title, new { htmlAttributes = new { @class = "form-control", placeholder = "Add" } })
+                                        @Html.ValidationMessageFor(model => model.ProjectFeature.Title, "", new { @class = "text-danger" })
+                                    </div>
+                                    <br />
+                                    <button type="submit" class="btn btn-default"> Add Feature</button>
+                                }
+                            </div>
+
+                            <div class="col-md-9">
+                                <div class="box-body">
+                                    <label class="control-label"> All Features</label>
+                                    <table class="table">
+                                        <tr>
+                                            <th>
+                                                Name
+                                            </th>
+
+
+                                            <th>Action</th>
+                                        </tr>
+                                        @{
+                                            int count = 0;
+                                        }
+
+                                        @foreach (var item in Model.ProjectFeatures)
+                                        {
+                                            <tr>
+
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Title)
+                                                </td>
+
+                                                <td>
+                                                    @using (Html.BeginForm("DeleteFeature", "ProjectManager", new { area = "Admin" }))
+                                                    {
+
+                                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                                        @Html.HiddenFor(c => c.Id)
+                                                        @Html.HiddenFor(c => c.ProjectFeature.Id, new { Value = item.Id })
+
+
+                                                        <button type="submit" class="btn btn-default"> Remove</button>
+                                                    }
+
+                                                </td>
+
+
+
+                                            </tr>
+                                        }
+
+                                    </table>
+
+                                </div>
+
+                            </div>@*col-md-9*@
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
 
 
     </section>

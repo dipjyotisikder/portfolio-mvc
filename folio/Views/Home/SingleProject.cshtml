@@ -1,10 +1,12 @@
 ﻿@model folio.Areas.Portfolio.Models.ViewModels.HomeViewModel
 
 @{
-                /**/
+    /**/
 
-                ViewBag.Title = "SingleProject";
-                Layout = "~/Views/Shared/_Layout.cshtml";
+    /**/
+
+    ViewBag.Title = "SingleProject";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <!--================Home Banner Area =================-->
 <section class="banner_area">
@@ -49,22 +51,12 @@
                     <h3 class="mb-20 title_color">Features</h3>
                     <div class="">
                         <ul class="unordered-list">
-                            <li>Fta Keys</li>
-                            <li>For Women Only Your Computer Usage</li>
-                            <li>
-                                Facts Why Inkjet Printing Is Very Appealing
-                                <ul>
-                                    <li>
-                                        Addiction When Gambling Becomes
-                                        <ul>
-                                            <li>Protective Preventative Maintenance</li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>Dealing With Technical Support 10 Useful Tips</li>
-                            <li>Make Myspace Your Best Designed Space</li>
-                            <li>Cleaning And Organizing Your Computer</li>
+                            @foreach (var item in Model.ProjectFeatures)
+                            {
+                                <li>@item.Title</li>
+                            }
+
+
                         </ul>
                     </div>
                 </div>

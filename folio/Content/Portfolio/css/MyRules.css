@@ -8,7 +8,7 @@
 
 .p_120 {
     padding-top: 20px !important;
-    padding-bottom: 20px !important;
+    padding-bottom: 50px !important;
 }
 
 .banner_area .banner_inner {
@@ -16,7 +16,7 @@
 }
 
 .banner_area {
-    min-height: 300px !important;
+    min-height: 200px !important;
 }
 
 .footer_area {
@@ -41,4 +41,16 @@
 
 .social_widget .list li a {
     color: #aa8d80 !important;
+}
+
+.projects_text a {
+    color: #a4dc47 !important;
+}
+
+.feature_item a {
+    color: #74bf45 !important;
+}
+
+.contact_form .form-group .form-control {
+    border: 1px solid #f8b60057 !important;
 }

@@ -14,6 +14,8 @@ namespace folio.Areas.Portfolio.Models.ViewModels
         public Project Project { get; set; }
 
         public List<ProjectSkill> ProjectSkills { get; set; }
+        public List<ProjectFeature> ProjectFeatures { get; set; }
+
 
     }
 }

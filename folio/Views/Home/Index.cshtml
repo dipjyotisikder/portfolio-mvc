@@ -1,8 +1,10 @@
 ﻿@model folio.Areas.Portfolio.Models.ViewModels.HomeViewModel
 
 @{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+                /**/
+
+                ViewBag.Title = "Index";
+                Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
@@ -24,7 +26,7 @@
                         <p class="text-justify">
                             A Creative Learner, Coder and Thinker.
                         </p>
-                        <a href="#" class="genric-btn primary circle arrow">Visit Projects<span class="lnr lnr-arrow-right"></span></a>
+                        <a href="/Home/projectGallery" class="genric-btn primary circle arrow">Visit Projects<span class="lnr lnr-arrow-right"></span></a>
                     </div>
                 </div>
             </div>
@@ -110,7 +112,7 @@
             {
                 <div class="col-lg-4 col-md-6">
                     <div class="feature_item">
-                        <img class="img-responsive projectpic" src="~/Content/Portfolio/img/banner/DipjyotiSquareSize2.png"></img>
+                        <img class="img-responsive projectpic" src="@item.ProjectImages.ToList().FirstOrDefault().ImageUrl"></img>
                         <h4>@Html.ActionLink(item.Name, "SingleProject", "Home", new { id = item.Id }, new { hidefocus = "hidefocus" }) </h4>
                         <p>@item.Description</p>
                     </div>

@@ -209,7 +209,8 @@ namespace folio.Areas.Admin.Controllers
                 ProjectImages = projects.ProjectImages,
                 ProjectSkills = ps,
                 TotalSkills = tskill,
-                AddSkillViewModel = addvm
+                AddSkillViewModel = addvm,
+                ProjectFeatures = await db.ProjectFeatures.Where(c => c.ProjectId == id).ToListAsync()
             };
 
             return View(vm);
@@ -277,6 +278,32 @@ namespace folio.Areas.Admin.Controllers
 
             await db.SaveChangesAsync();
             return RedirectToAction("Edit", new { id = model.AddSkillViewModel.ProjectId });
+        }
+
+
+        [HttpPost]
+        public async Task<ActionResult> AddFeature(ProjectViewModel model)
+        {
+
+            var projectFeature = new ProjectFeature();
+            projectFeature.Title = model.ProjectFeature.Title;
+            projectFeature.ProjectId = model.Id;
+
+            db.ProjectFeatures.Add(projectFeature);
+            await db.SaveChangesAsync();
+
+            return RedirectToAction("Edit", new { id = model.Id });
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> DeleteFeature(ProjectViewModel model)
+        {
+            var projectFeature = await db.ProjectFeatures.FindAsync(model.ProjectFeature.Id);
+
+            db.ProjectFeatures.Remove(projectFeature);
+            await db.SaveChangesAsync();
+
+            return RedirectToAction("Edit", new { id = model.Id });
         }
 
 

@@ -1,5 +1,5 @@
 ﻿web:
-<add name="MyDb" connectionString="Server=tcp:dipjyotiserver.database.windows.net,1433;Initial Catalog=portfoliodb;Persist Security Info=False;User ID={your_username};Password={your_password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;" providerName="System.Data.SqlClient"/>
+    <add name="DefaultConnection" connectionString="Server=tcp:dipjyotiserver.database.windows.net,1433;Initial Catalog=portfoliodb;Persist Security Info=False;User ID=dipjyotiserver;Password=Dipjyoti@server;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;" providerName="System.Data.SqlClient"/>
 
 
 
