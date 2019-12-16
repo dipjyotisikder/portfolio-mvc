@@ -20,12 +20,21 @@ namespace folio.Areas.Portfolio.Controllers
 
         public async Task<ActionResult> Index()
         {
-            var skills = await db.Pskills.Include(sk => sk.Pimages).ToListAsync();
-            var projects = await db.Projects.Include(p => p.ProjectImages).Include(p => p.ProjectSkills).ToListAsync();
+            var skills = await db.Pskills
+                .Include(sk => sk.Pimages)
+                .ToListAsync();
+
+            var projects = await db.Projects
+                .Include(p => p.ProjectImages)
+                .Include(p => p.ProjectSkills)
+                .Take(3)
+                .ToListAsync();
+
             var vm = new HomeViewModel
             {
                 Pskills = skills,
-                Projects = projects
+                Projects = projects,
+                ProjectCount = db.Projects.Count()
             };
             return View(vm);
         }

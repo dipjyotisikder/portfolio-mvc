@@ -16,6 +16,6 @@ namespace folio.Areas.Portfolio.Models.ViewModels
         public List<ProjectSkill> ProjectSkills { get; set; }
         public List<ProjectFeature> ProjectFeatures { get; set; }
 
-
+        public int ProjectCount { get; set; }
     }
 }

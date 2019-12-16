@@ -6,6 +6,10 @@
     max-width: 310px;
 }
 
+.feature_inner {
+    margin-bottom: 0px!important;
+}
+
 .p_120 {
     padding-top: 20px !important;
     padding-bottom: 50px !important;

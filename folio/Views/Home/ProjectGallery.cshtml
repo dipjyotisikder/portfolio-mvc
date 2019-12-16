@@ -36,27 +36,29 @@
 
             </ul>
         </div>
-        <div class="projects_inner row">
-
+        <div class="feature_inner row">
             @foreach (var item in Model.Projects)
             {
-                //var value = item.ProjectSkills.Select(c => c.Pskill.Category.Name).ToList().Take(1);
-                //data.Add(value.ToString().Replace(" ", String.Empty));
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature_item">
+                        @if (item.ProjectImages.Count == 0)
+                        {
+                            <img class="img-responsive projectpic" src="~/Content/Portfolio/img/no.image.600x300.png" />
 
-                <div class="col-lg-4 col-sm-6 brand web">
-                    <div class="projects_item">
-                        <img class="img-fluid" src="@item.ProjectImages.ToList().FirstOrDefault().ImageUrl" alt="@item.ProjectImages.ToList().FirstOrDefault().Id">
-                        <div class="projects_text">
-                            <h3>@Html.ActionLink(item.Name, "SingleProject", "Home", new { id = item.Id }, new { hidefocus = "hidefocus" })</h3>
+                        }
+                        else
+                        {
+                            <img class="img-responsive projectpic" src="@item.ProjectImages.ToList().FirstOrDefault().ImageUrl" />
 
-                            <p>Client Project</p>
-                        </div>
+                        }
+
+                        <h4>@Html.ActionLink(item.Name, "SingleProject", "Home", new { id = item.Id }, new { hidefocus = "hidefocus" }) </h4>
+                        <p>@item.Description</p>
                     </div>
                 </div>
-
-
             }
         </div>
+
     </div>
 </section>
 <!--================End Projects Area =================-->

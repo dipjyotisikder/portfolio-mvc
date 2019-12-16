@@ -34,16 +34,18 @@
                     <h3 class="mb-20 title_color">Skills</h3>
                     <div class="">
                         <ul class="unordered-list">
-
-
                             @foreach (var name in Model.ProjectSkills.Select(c => c.Pskill.Name))
                             {
 
                                 <li>@name</li>
-
                             }
-
                         </ul>
+                        @if (!Model.ProjectSkills.Any())
+                        {
+                            <div class="col-md-12">
+                                <p>No Skills found</p>
+                            </div>
+                        }
                     </div>
                 </div>
 
@@ -55,9 +57,14 @@
                             {
                                 <li>@item.Title</li>
                             }
-
-
+                            
                         </ul>
+                            @if (!Model.ProjectFeatures.Any())
+                            {
+                                <div class="col-md-12">
+                                    <p>No Features found</p>
+                                </div>
+                            }
                     </div>
                 </div>
             </div>
@@ -69,7 +76,6 @@
 <div class="container section-top-border">
     <h3 class="title_color">Image Gallery</h3>
     <div class="row gallery-item">
-
         @foreach (var item in Model.Project.ProjectImages)
         {
             <div class="col-md-6">
@@ -78,8 +84,13 @@
                 </a>
             </div>
         }
-
     </div>
+        @if (!Model.Project.ProjectImages.Any())
+        {
+            <div class="col-md-12">
+                <p>No Images found</p>
+            </div>
+        }
 </div>
 
 <!--================Image Area =================-->
