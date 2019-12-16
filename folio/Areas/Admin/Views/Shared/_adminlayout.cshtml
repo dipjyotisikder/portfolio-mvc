@@ -61,7 +61,7 @@
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>A</b>LT</span>
                 <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg"><b>Freshmart Admin</b></span>
+                <span class="logo-lg"><b>Portfolio Admin</b></span>
             </a>
 
             <!-- Header Navbar: style can be found in header.less -->
@@ -110,12 +110,9 @@
                                     {
                                         <img src="~/Content/Admin/img/materialthumb.jpg" class="img-circle" alt="User Image">
                                     }
-
-
-
                                     <p>
                                         <a style="color: chartreuse" href="/admin/adminprofile/index"> @firstName&nbsp;@lastName - Web Developer</a>
-                                        <small>Member since Nov. 2012</small>
+                                        @*<small>Member since Nov. 2012</small>*@
                                     </p>
                                 </li>
                                 <!-- Menu Body -->
@@ -202,7 +199,9 @@
                             <li><a href="/admin/ProjectManager/create"> <i class="fa fa-circle-o text-yellow"></i>Create project </a></li>
 
                         </ul>
-                    </li>  @* Skill manage *@
+                    </li>  
+    
+    @* Skill manage *@
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-product-hunt text-aqua"></i>
@@ -215,24 +214,27 @@
                             <li><a href="/admin/SkillsManager"> <i class="fa fa-circle-o text-yellow"></i>Home </a></li>
                             <li><a href="/admin/SkillsManager/create"> <i class="fa fa-circle-o text-yellow"></i>Create Skill </a></li>
 
+                            @* categories manage *@
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="fa fa-product-hunt"></i>
+                                    <span>Skill Category</span>
+                                    <span class="pull-right-container">
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li><a href="/admin/CategoryManager"> <i class="fa fa-circle-o text-yellow"></i>All Categories </a></li>
+                                    <li><a href="/admin/CategoryManager/create"> <i class="fa fa-circle-o text-green"></i>Add Category</a></li>
+
+                                </ul>
+                            </li>
+
+
                         </ul>
                     </li>
 
-                    @* categories manage *@
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-product-hunt"></i>
-                            <span>Category Manager</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="/admin/CategoryManager"> <i class="fa fa-circle-o text-yellow"></i>All Categories </a></li>
-                            <li><a href="/admin/CategoryManager/create"> <i class="fa fa-circle-o text-green"></i>Add Category</a></li>
-
-                        </ul>
-                    </li>
+                   
 
                 </ul>
             </section>
