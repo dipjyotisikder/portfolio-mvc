@@ -365,6 +365,7 @@
     <Content Include="Content\Portfolio\img\logo 2.png" />
     <Content Include="Content\Portfolio\img\logo-2.png" />
     <Content Include="Content\Portfolio\img\logo.png" />
+    <Content Include="Content\Portfolio\img\no.image.600x300.png" />
     <Content Include="Content\Portfolio\img\projects\projects-1.jpg" />
     <Content Include="Content\Portfolio\img\projects\projects-2.jpg" />
     <Content Include="Content\Portfolio\img\projects\projects-3.jpg" />
@@ -584,6 +585,7 @@
     <Content Include="Content\Portfolio\vendors\linericon\fonts\Linearicons-Free.woff2" />
     <None Include="Properties\PublishProfiles\diportfolio - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\diportfolio - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

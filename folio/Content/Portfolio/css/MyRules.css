@@ -54,3 +54,7 @@
 .contact_form .form-group .form-control {
     border: 1px solid #f8b60057 !important;
 }
+.container.login-container {
+    margin-top: 100px;
+   max-width:600px;
+}

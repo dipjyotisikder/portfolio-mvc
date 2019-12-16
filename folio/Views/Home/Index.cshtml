@@ -1,10 +1,10 @@
 ﻿@model folio.Areas.Portfolio.Models.ViewModels.HomeViewModel
 
 @{
-                /**/
+    /**/
 
-                ViewBag.Title = "Index";
-                Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
@@ -24,7 +24,7 @@
                         <h5>This is me</h5>
                         <h2>Dipjyoti Sikder</h2>
                         <p class="text-justify">
-                            A Creative Learner, Coder and Thinker.
+                            A Creative Learner, Coder and Thinker
                         </p>
                         <a href="/Home/projectGallery" class="genric-btn primary circle arrow">Visit Projects<span class="lnr lnr-arrow-right"></span></a>
                     </div>
@@ -48,13 +48,13 @@
                         Love to be a thinker more than being anything else.
                     </p>
                     <div class="row">
-                        <div class="col-md-4">
-                            <div class="wel_item">
-                                <i class="lnr lnr-database"></i>
-                                <h4>$2.5M</h4>
-                                <p>Total Donation</p>
-                            </div>
-                        </div>
+                        @*<div class="col-md-4">
+                                <div class="wel_item">
+                                    <i class="lnr lnr-database"></i>
+                                    <h4>$2.5M</h4>
+                                    <p>Total Donation</p>
+                                </div>
+                            </div>*@
                         <div class="col-md-4">
                             <div class="wel_item">
                                 <i class="lnr lnr-book"></i>
@@ -65,8 +65,8 @@
                         <div class="col-md-4">
                             <div class="wel_item">
                                 <i class="lnr lnr-users"></i>
-                                <h4>3965</h4>
-                                <p>Total Volunteers</p>
+                                <h4>40</h4>
+                                <p>Total Views</p>
                             </div>
                         </div>
                     </div>
@@ -104,29 +104,29 @@
             <h2>offerings to my clients</h2>
             <p>If you are looking at blank cassettes on the web, you may be very confused at the difference in price. You may see some for as low as $.17 each.</p>
         </div>
-
-
         <div class="feature_inner row">
 
             @foreach (var item in Model.Projects)
             {
                 <div class="col-lg-4 col-md-6">
                     <div class="feature_item">
-                        <img class="img-responsive projectpic" src="@item.ProjectImages.ToList().FirstOrDefault().ImageUrl"></img>
+                        @if (item.ProjectImages.Count == 0)
+                        {
+                            <img class="img-responsive projectpic" src="~/Content/Portfolio/img/no.image.600x300.png"></img>
+
+                        }
+                        else
+                        {
+                            <img class="img-responsive projectpic" src="@item.ProjectImages.ToList().FirstOrDefault().ImageUrl"></img>
+
+                        }
+
                         <h4>@Html.ActionLink(item.Name, "SingleProject", "Home", new { id = item.Id }, new { hidefocus = "hidefocus" }) </h4>
                         <p>@item.Description</p>
                     </div>
                 </div>
             }
 
-
-            @*<div class="col-lg-4 col-md-6">
-                    <div class="feature_item">
-                        <i class="flaticon-skyline"></i>
-                        <h4>Interior Design</h4>
-                        <p>If you are looking at blank cassettes on the web, you may be very confused at the difference in price. You may see some for as low as $17 each.</p>
-                    </div>
-                </div>*@
 
 
         </div>
