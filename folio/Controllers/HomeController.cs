@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using System.Threading.Tasks;
 using System.Net;
 using System.Net.Mail;
+using WorkBase.services.concretes;
 
 namespace folio.Areas.Portfolio.Controllers
 {
@@ -80,36 +81,39 @@ namespace folio.Areas.Portfolio.Controllers
 
 
         [HttpPost]
-        public ActionResult SendEmail(string receiver, string subject, string message)
+        public async Task<ActionResult> SendEmail(string name, string email, string subject, string message)
         {
             try
             {
-                if (ModelState.IsValid)
-                {
-                    var senderEmail = new MailAddress("jamilmoughal786@gmail.com", "Jamil");
-                    var receiverEmail = new MailAddress(receiver, "Receiver");
-                    var password = "Your Email Password here";
-                    var sub = subject;
-                    var body = message;
-                    var smtp = new SmtpClient
-                    {
-                        Host = "smtp.gmail.com",
-                        Port = 587,
-                        EnableSsl = true,
-                        DeliveryMethod = SmtpDeliveryMethod.Network,
-                        UseDefaultCredentials = false,
-                        Credentials = new NetworkCredential(senderEmail.Address, password)
-                    };
-                    using (var mess = new MailMessage(senderEmail, receiverEmail)
-                    {
-                        Subject = subject,
-                        Body = body
-                    })
-                    {
-                        smtp.Send(mess);
-                    }
-                    return View("Contact");
-                }
+                var sender = new EmailSender();
+                await sender.SendAsync(subject, message, new string[] { email });
+
+                //if (ModelState.IsValid)
+                //{
+                //    var senderEmail = new MailAddress("jamilmoughal786@gmail.com", "Jamil");
+                //    var receiverEmail = new MailAddress(receiver, "Receiver");
+                //    var password = "Your Email Password here";
+                //    var sub = subject;
+                //    var body = message;
+                //    var smtp = new SmtpClient
+                //    {
+                //        Host = "smtp.gmail.com",
+                //        Port = 587,
+                //        EnableSsl = true,
+                //        DeliveryMethod = SmtpDeliveryMethod.Network,
+                //        UseDefaultCredentials = false,
+                //        Credentials = new NetworkCredential(senderEmail.Address, password)
+                //    };
+                //    using (var mess = new MailMessage(senderEmail, receiverEmail)
+                //    {
+                //        Subject = subject,
+                //        Body = body
+                //    })
+                //    {
+                //        smtp.Send(mess);
+                //    }
+                //    return View("Contact");
+                //}
             }
             catch (Exception)
             {

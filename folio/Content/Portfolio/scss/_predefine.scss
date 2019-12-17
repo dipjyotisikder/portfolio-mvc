@@ -23,9 +23,10 @@ body{
     font-weight: normal;
     color: $pfont;
 }
-h1, h2, h3, h4, h5, h6{ 
-    font-family: $hee; 
+h1, h2, h3, h4, h5, h6 {
+    font-family: $hee;
     font-weight: bold;
+    color: #808080;
 }
 
 button:focus{

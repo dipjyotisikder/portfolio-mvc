@@ -1,5 +1,13 @@
 ﻿.mypic {
-    height: 500px;
+    height: 400px;
+    opacity: 0.8;
+    border-radius: 76px;
+    vertical-align: middle;
+    border-style: hidden;
+    /* width: 500px; */
+    box-shadow: -1px 0px 25px -13px;
+    /* height: 191px; */
+    background: linear-gradient(90deg, rgb(252, 247, 247) 0%, #4cd3e317 43%, rgb(246, 241, 241) 100%);
 }
 
 .projectpic {
@@ -24,7 +32,7 @@
 }
 
 .footer_area {
-    background: #e3e6ff !important;
+    background: #f3f3f3 !important;
 }
 
 .f_title h3 {
@@ -56,9 +64,19 @@
 }
 
 .contact_form .form-group .form-control {
-    border: 1px solid #f8b60057 !important;
+    border: 1px solid #62bcfc57 !important;
 }
 .container.login-container {
     margin-top: 100px;
    max-width:600px;
+}
+
+.home_left_img img {
+    opacity: 0.8;
+    border-radius: 76px;
+    vertical-align: middle;
+    border-style: hidden;
+    /* width: 500px; */
+    box-shadow: -1px 0px 25px -13px;
+    /* height: 191px; */
 }
