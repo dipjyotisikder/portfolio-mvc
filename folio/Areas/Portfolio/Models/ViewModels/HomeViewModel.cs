@@ -1,4 +1,5 @@
-﻿using System;
+﻿using folio.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -17,5 +18,7 @@ namespace folio.Areas.Portfolio.Models.ViewModels
         public List<ProjectFeature> ProjectFeatures { get; set; }
 
         public int ProjectCount { get; set; }
+
+        public StatusMessageViewModel Status { get; set; }
     }
 }

@@ -243,15 +243,21 @@
     <Compile Include="Migrations\201904060847101_AddTableProjectFeature.Designer.cs">
       <DependentUpon>201904060847101_AddTableProjectFeature.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201912182210543_EmailInfoTable.cs" />
+    <Compile Include="Migrations\201912182210543_EmailInfoTable.Designer.cs">
+      <DependentUpon>201912182210543_EmailInfoTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\EmailOptions.cs" />
+    <Compile Include="Models\Email\EmailInfo.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\EmailSender.cs" />
     <Compile Include="Services\GetImageUrl.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\StatusMessageViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Admin\css\AdminLTE.min.css" />
@@ -678,6 +684,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201904060847101_AddTableProjectFeature.resx">
       <DependentUpon>201904060847101_AddTableProjectFeature.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912182210543_EmailInfoTable.resx">
+      <DependentUpon>201912182210543_EmailInfoTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

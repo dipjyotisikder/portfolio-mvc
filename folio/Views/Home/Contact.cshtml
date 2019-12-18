@@ -24,6 +24,35 @@
     <div class="container">
 
         <div class="row">
+            <div class="col-md-12">
+                <div class="contact_info">
+
+                    <div class="info_item">
+
+                        @{
+                            if (Model?.Status != null)
+                            {
+                                if (Model?.Status?.Type == "success")
+                                {
+                                    @*<i class="lnr lnr-smile"></i>*@
+                                    <p class="text-success" style="text-align:center">@Model.Status.Message</p>
+                                }
+                                else
+                                {
+                                    @*<i class="lnr lnr-warning"></i>*@
+                                    <p class="text-danger" style="text-align:center">@Model.Status.Message</p>
+                                }
+
+                            }
+                        }
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+        <div class="row">
             <div class="col-lg-3">
                 <div class="contact_info">
                     <div class="info_item">
@@ -36,7 +65,6 @@
                         <h6><a href="#">+880 16 7650 1078</a></h6>
                         <p>24/7 available!</p>
                     </div>
-
                 </div>
             </div>
             <div class="col-lg-9">

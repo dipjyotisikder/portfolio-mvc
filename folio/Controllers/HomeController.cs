@@ -11,6 +11,9 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Net.Mail;
 using WorkBase.services.concretes;
+using folio.Models.Email;
+using folio.ViewModels;
+using System.ComponentModel.DataAnnotations;
 
 namespace folio.Areas.Portfolio.Controllers
 {
@@ -58,7 +61,6 @@ namespace folio.Areas.Portfolio.Controllers
                 single.Pskills = await db.Pskills.Include(c => c.ProjectSkills).ToListAsync();
                 single.ProjectSkills = await db.ProjectSkills.Where(c => c.ProjectId == id).ToListAsync();
                 single.ProjectFeatures = await db.ProjectFeatures.Where(c => c.ProjectId == id).ToListAsync();
-
             }
             return View(single);
         }
@@ -73,53 +75,91 @@ namespace folio.Areas.Portfolio.Controllers
             return View(homevm);
         }
 
-
-        public ActionResult Contact()
+        public ActionResult Contact(HomeViewModel model)
         {
-            return View();
+            return View(model);
         }
 
+        bool IsValidEmail(string emailaddress)
+        {
+            try
+            {
+                MailAddress m = new MailAddress(emailaddress);
+
+                return true;
+            }
+            catch (FormatException)
+            {
+                return false;
+            }
+        }
 
         [HttpPost]
         public async Task<ActionResult> SendEmail(string name, string email, string subject, string message)
         {
+            if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(email) || string.IsNullOrEmpty(subject) || string.IsNullOrEmpty(message))
+            {
+                var model = new HomeViewModel
+                {
+                    Status = new StatusMessageViewModel
+                    {
+                        Message = "Please fillup all the fields",
+                        Type = "error"
+                    }
+                };
+                return View("Contact", model);
+            }
+            if (!IsValidEmail(email))
+            {
+                var model = new HomeViewModel
+                {
+                    Status = new StatusMessageViewModel
+                    {
+                        Message = "Email address is invalid!",
+                        Type = "error"
+                    }
+                };
+                return View("Contact", model);
+            }
+
+            //save the informations in database
+            var info = new EmailInfo
+            {
+                Name = name,
+                Email = email,
+                Subject = subject,
+                Message = message
+            };
+            db.EmailInfos.Add(info);
+            await db.SaveChangesAsync();
             try
             {
                 var sender = new EmailSender();
-                await sender.SendAsync(subject, message, new string[] { email });
-
-                //if (ModelState.IsValid)
-                //{
-                //    var senderEmail = new MailAddress("jamilmoughal786@gmail.com", "Jamil");
-                //    var receiverEmail = new MailAddress(receiver, "Receiver");
-                //    var password = "Your Email Password here";
-                //    var sub = subject;
-                //    var body = message;
-                //    var smtp = new SmtpClient
-                //    {
-                //        Host = "smtp.gmail.com",
-                //        Port = 587,
-                //        EnableSsl = true,
-                //        DeliveryMethod = SmtpDeliveryMethod.Network,
-                //        UseDefaultCredentials = false,
-                //        Credentials = new NetworkCredential(senderEmail.Address, password)
-                //    };
-                //    using (var mess = new MailMessage(senderEmail, receiverEmail)
-                //    {
-                //        Subject = subject,
-                //        Body = body
-                //    })
-                //    {
-                //        smtp.Send(mess);
-                //    }
-                //    return View("Contact");
-                //}
+                await sender.SendAsync(subject, message, new string[] { "dipjyotisikder@gmail.com" });
+                //after successfully email sending complete
+                var model = new HomeViewModel
+                {
+                    Status = new StatusMessageViewModel
+                    {
+                        Message = "Thanks for your valuable message!",
+                        Type = "success"
+                    }
+                };
+                return View("Contact", model);
             }
             catch (Exception)
             {
                 ViewBag.Error = "Some Error";
+                var model = new HomeViewModel
+                {
+                    Status = new StatusMessageViewModel
+                    {
+                        Message = "Something error occured!",
+                        Type = "error"
+                    }
+                };
+                return View("Contact", model);
             }
-            return View("Contact");
         }
 
 

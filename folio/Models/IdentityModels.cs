@@ -4,6 +4,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using folio.Areas.Portfolio.Models;
+using folio.Models.Email;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
@@ -33,6 +34,7 @@ namespace folio.Models
     {
 
         public DbSet<Pcategory> Pcategories { get; set; }
+        public DbSet<EmailInfo> EmailInfos { get; set; }
         public DbSet<Pimage> Pimages { get; set; }
         public DbSet<Pskill> Pskills { get; set; }
         public DbSet<Project> Projects { get; set; }
