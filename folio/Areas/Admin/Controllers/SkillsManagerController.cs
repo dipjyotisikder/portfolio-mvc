@@ -205,7 +205,7 @@ namespace folio.Areas.Admin.Controllers
         public async Task<ActionResult> RemovePic(int id)
         {
 
-            var current = await db.Pimages.FindAsync(id);
+            var current = await db.ProjectImages.FindAsync(id);
 
             //remove pic from folder too
             var fullPath = Server.MapPath(current.ImageUrl);
@@ -215,11 +215,11 @@ namespace folio.Areas.Admin.Controllers
                 System.IO.File.Delete(fullPath);
             }
 
-            db.Pimages.Remove(current);
+            db.ProjectImages.Remove(current);
             await db.SaveChangesAsync();
             var sid = (int)TempData["id"];
 
-            return RedirectToAction("Edit", new { id = sid });
+            return RedirectToAction("Edit", "ProjectManager", new { id = sid });
         }
 
 
